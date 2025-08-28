@@ -38,7 +38,7 @@ public class GravityCube : MonoBehaviour
     // cached
     Rigidbody rb;
     Collider col;
-    Renderer rend;
+    [SerializeField] private Renderer rend;
     AudioSource audioSrc;
     MaterialPropertyBlock mpb;
 
@@ -48,11 +48,12 @@ public class GravityCube : MonoBehaviour
     Vector3 lastGroundNormal;  // VFX
     Vector3 lastGroundPoint;
 
+    public Vector3 SurfaceUp => surfaceUp;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
-        rend = GetComponent<Renderer>();
         audioSrc = GetComponent<AudioSource>();
 
         rb.useGravity = false;
@@ -183,7 +184,7 @@ public class GravityCube : MonoBehaviour
     {
         Vector3 dir = gravity.normalized;
         Vector3 origin = transform.position;
-        float distance = 0.55f;
+        float distance = 1.05f;
 
         IsGrounded = Physics.Raycast(origin, dir, distance, groundMask);
 
